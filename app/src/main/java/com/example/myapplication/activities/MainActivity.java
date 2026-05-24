@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             int id = res.getInt(0);
             String name = res.getString(1);
             String desc = res.getString(2);
-            spotList.add(new StudySpot(id, name, desc));
+            spotList.add(new StudySpot(id, name, desc, res.getDouble(3), res.getDouble(4)));
         }
 
         adapter = new SpotAdapter(this, spotList);

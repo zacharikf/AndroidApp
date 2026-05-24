@@ -7,8 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "CampusOasis.db";
-    private static final int DATABASE_VERSION = 1;
+    private static  final String DATABASE_NAME = "CampusOasis.db";
+    // CHANGED TO VERSION 2 TO TRIGGER THE UPGRADE
+    private static final int DATABASE_VERSION = 2;
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -16,8 +17,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Creates the table with an ID, Name, and Description
-        db.execSQL("CREATE TABLE study_spots (ID INTEGER PRIMARY KEY AUTOINCREMENT, SPOT_NAME TEXT, DESCRIPTION TEXT)");
+        // Added LATITUDE and LONGITUDE as REAL (decimal) numbers
+        db.execSQL("CREATE TABLE study_spots (ID INTEGER PRIMARY KEY AUTOINCREMENT, SPOT_NAME TEXT, DESCRIPTION TEXT, LATITUDE REAL, LONGITUDE REAL)");
     }
 
     @Override
@@ -26,17 +27,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Method to add a new spot
-    public boolean insertSpot(String name, String description) {
+    // Updated insert method to require coordinates
+    public boolean insertSpot(String name, String description, double lat, double lng) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("SPOT_NAME", name);
         contentValues.put("DESCRIPTION", description);
+        contentValues.put("LATITUDE", lat);
+        contentValues.put("LONGITUDE", lng);
         long result = db.insert("study_spots", null, contentValues);
         return result != -1;
     }
 
-    // Method to read all spots
     public Cursor getAllSpots() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM study_spots", null);

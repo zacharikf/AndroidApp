@@ -37,7 +37,11 @@ public class AddSpotActivity extends AppCompatActivity {
                     return;
                 }
 
-                boolean inserted = myDb.insertSpot(name, desc);
+                // Hardcoding AUTH coordinates for right now so the app compiles
+                double defaultLat = 40.6279;
+                double defaultLng = 22.9580;
+
+                boolean inserted = myDb.insertSpot(name, desc, defaultLat, defaultLng);
                 if (inserted) {
                     Toast.makeText(AddSpotActivity.this, "Spot Saved!", Toast.LENGTH_SHORT).show();
                     finish(); // Closes screen and goes back to Dashboard
