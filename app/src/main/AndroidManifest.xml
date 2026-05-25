@@ -14,22 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY_GOES_HERE" />
+        <activity android:name=".activities.DashboardActivity" />
+        <activity android:name=".activities.AddSpotActivity" />
+        <activity android:name=".activities.SpotDetailsActivity" />
+        <activity android:name=".activities.MapActivity" />
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.MainActivity" />
 
-        <activity android:name=".activities.DashboardActivity" android:exported="true">
+        <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.AddSpotActivity" />
-        <activity android:name=".activities.SpotDetailsActivity" />
-
-        <activity android:name=".activities.MapActivity" />
 
     </application>
 </manifest>
